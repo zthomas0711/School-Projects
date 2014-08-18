@@ -1,0 +1,83 @@
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+
+
+public class taxLibrary {
+
+	protected Shell shell;
+	private Text answer;
+	//four rules to determine kingdoms
+	 
+	
+			
+
+	/**
+	 * Launch the application.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			taxLibrary window = new taxLibrary();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Open the window.
+	 */
+	public void open() {
+		Display display = Display.getDefault();
+		createContents();
+		shell.open();
+		shell.layout();
+		while (!shell.isDisposed()) {
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+	}
+
+	/**
+	 * Create contents of the window.
+	 */
+	protected void createContents() {
+		shell = new Shell();
+		shell.setSize(450, 300);
+		shell.setText("SWT Application");
+		
+		 final Label question1 = new Label(shell, SWT.NONE);
+		question1.setBounds(87, 65, 260, 46);
+		question1.setText(questions[0]);
+		
+		
+		answer = new Text(shell, SWT.BORDER);
+		answer.setBounds(176, 159, 78, 26);
+		
+		Label lblEnteryesOr = new Label(shell, SWT.NONE);
+		lblEnteryesOr.setBounds(157, 133, 133, 20);
+		lblEnteryesOr.setText("Enter \"Yes\" or \"No\"");
+		
+		Button btnEnter = new Button(shell, SWT.NONE);
+		btnEnter.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				//System.out.println(questions[0]);
+				final Label question2=new Label(shell, SWT.NONE);
+				question2.setBounds(87, 65, 260, 46);
+				question2.setText(questions[1]);
+					
+			}
+		});
+		btnEnter.setBounds(332, 213, 90, 30);
+		btnEnter.setText("Enter");
+
+	}
+}

@@ -1,0 +1,20 @@
+import java.util.Scanner;
+public class classifier {
+	
+
+	public static void main(String[] args) {
+		/*String[] questions={
+			"Does it have a nucleus?",
+			"Is it single-celled?",
+			"Does it make its own food by photosynthesis?",
+			"Is it an amphibian, reptile, fish, bird, or mammal?"
+		};
+		System.out.println(questions[0]);*/
+		Scanner myScanner=new Scanner(System.in);
+		System.out.println("Enter something");
+		String s=myScanner.nextLine();
+		System.out.println("You entered: "+ s);
+		
+	}
+
+}

@@ -1,0 +1,147 @@
+import java.util.Scanner;
+import java.util.*;
+
+public class classifier {
+	public String answer;
+	public ArrayList<String>questions=new ArrayList<String>();
+	public ArrayList<String>results=new ArrayList<String>();
+	public String defaultResponse="Please answer all questions with Yes or No.";
+	
+	public void setRules(String answer)
+	{
+		
+		switch(checkAnswer(answer))
+		{
+			case "YES":
+				questions.add("Does it have a nucleus?");
+				questions.add("Is it single-celled?");
+				questions.add("Does it make its own food by photosynthesis?");
+				questions.add("Is it an amphibian, reptile, fish, bird, or mammal?");
+				
+				results.add("Monera");
+				results.add("Protists");
+				results.add("Fungi");
+				results.add("Plant");
+				results.add("Animal");
+				
+				classify();
+				break;
+				
+			case "NO":
+				makeNewRules();
+				break;
+				
+			default:
+				System.out.println(defaultResponse);
+				break;
+		}
+		
+		
+	}
+	
+	public String checkAnswer(String answer)
+	{
+		return answer.toUpperCase();
+	}
+	
+	private void makeNewRules()
+	{	
+		boolean flag=false;
+		
+		//Scanner myScanner1=new Scanner(System.in);
+		
+			while(!flag)
+			{
+			Scanner myScanner1=new Scanner(System.in);
+			System.out.println("Please enter your rules in the order you want them applied");
+			answer=myScanner1.nextLine();
+			questions.add(answer);
+			
+						
+			System.out.println("Do you want to add anothe rule?");
+			answer=myScanner1.nextLine();
+			myScanner1.close();
+			
+				switch(checkAnswer(answer))
+				{
+					case "YES":
+						flag=false;
+						break;
+						
+					case "NO":
+						flag=true;
+						break;
+						
+					default:
+						System.out.println(defaultResponse);
+						break;
+				}
+			
+			
+			}	
+	}
+	
+	private void classify()
+	{	int i=0;
+		int lastQuestion=questions.size();
+	
+		Scanner myScanner2=new Scanner(System.in);
+		String defaultMessage="Your object is the class ";
+			while(i<=lastQuestion)
+			{
+			System.out.println(questions.get(i));
+			answer=myScanner2.nextLine();
+			
+				if(checkAnswer(answer).equals("YES"))
+				{
+					System.out.println(defaultMessage + results.get(i));
+					i=lastQuestion;
+				}
+				
+				else if(checkAnswer(answer).equals("NO"))
+				{
+					if(i==lastQuestion)
+					{
+						System.out.println(defaultMessage + results.get(i++));
+					}
+					
+					else
+					{
+						i++;
+					}
+				}
+				
+				else
+				{
+					System.out.println(defaultResponse);
+				}
+			}
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		String response;
+		classifier kingdoms= new classifier();
+		System.out.println();
+		System.out.println();
+		System.out.println("Would you like to use pre-existing rules?");
+		Scanner myScanner=new Scanner(System.in);
+		
+		response=myScanner.nextLine();
+		
+		kingdoms.setRules(response);
+		
+		myScanner.close();
+		
+		
+		
+		
+		
+		
+	
+		
+	}
+
+}
